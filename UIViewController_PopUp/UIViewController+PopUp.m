@@ -211,7 +211,7 @@
 
 - (BOOL)disableBlur
 {
-    return objc_getAssociatedObject(self, _cmd);
+    return (BOOL)objc_getAssociatedObject(self, _cmd);
 }
 
 - (void)setDisableBlur:(BOOL)disableBlur
