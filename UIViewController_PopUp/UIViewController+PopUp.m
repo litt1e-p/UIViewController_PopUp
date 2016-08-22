@@ -93,8 +93,6 @@
     [dismissButton addTarget:self action:@selector(dissmissBtnEvent) forControlEvents:UIControlEventTouchUpInside];
     [overlayView addSubview:dismissButton];
     
-    popUpView.layer.cornerRadius  = 3.5;
-    popUpView.layer.masksToBounds = YES;
     popUpView.layer.zPosition     = 99;
     popUpView.tag                 = kLPPUPopUpViewTag;
     popUpView.center              = overlayView.center;
