@@ -16,3 +16,9 @@ pod 'UIViewController_PopUp', '~> 0.0.2'
 ```swift
 just download lib folder and add into your project
 ```
+
+# Release notes
+
+- 0.0.1
+
+`release first version.`
