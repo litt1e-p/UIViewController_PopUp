@@ -19,6 +19,10 @@ just download lib folder and add into your project
 
 # Release notes
 
-- 0.0.1
+#### 0.0.2
+
+`remove default layer cornerRidus`
+
+#### 0.0.1
 
 `release first version.`
