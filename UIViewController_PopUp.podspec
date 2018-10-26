@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "UIViewController_PopUp"
-  s.version          = "0.0.2"
+  s.version          = "0.0.3"
   s.summary          = "extension of UIViewController for poping up a another ViewController"
   s.description      = <<-DESC
                        an extension of UIViewController for poping up a another ViewController with animation effects in Objective-C
