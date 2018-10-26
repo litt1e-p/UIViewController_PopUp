@@ -20,10 +20,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#import <UIKit/UIKit.h>
+#import "UIView+parentViewController.h"
 
-@interface UIView (Snapshot)
+@implementation UIView (parentViewController)
 
-- (UIImage *)snapshot;
+- (UIViewController *)parentViewController
+{
+    UIResponder *parentResponder = self;
+    while (parentResponder) {
+        parentResponder = [parentResponder nextResponder];
+        if ([parentResponder isKindOfClass:[UIViewController class]]) {
+            return (UIViewController *)parentResponder;
+        }
+    }
+    return nil;
+}
 
 @end

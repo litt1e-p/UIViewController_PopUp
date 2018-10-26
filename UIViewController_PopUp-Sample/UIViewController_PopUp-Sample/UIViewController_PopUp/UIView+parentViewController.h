@@ -22,8 +22,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIView (Snapshot)
+NS_ASSUME_NONNULL_BEGIN
 
-- (UIImage *)snapshot;
+@interface UIView (parentViewController)
+
+- (UIViewController *)parentViewController;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -1,6 +1,6 @@
 // The MIT License (MIT)
 //
-// Copyright (c) 2015-2016 litt1e-p ( https://github.com/litt1e-p )
+// Copyright (c) 2018-2019 litt1e-p ( https://github.com/litt1e-p )
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,6 +24,7 @@
 #import <objc/runtime.h>
 #import "UIImage+ImageEffects.h"
 #import "UIView+Snapshot.h"
+#import "UIView+parentViewController.h"
 
 #define kLPPURotationAngle 70.0
 #define kLPPUAnimationDuration 0.4
@@ -124,15 +125,25 @@
 {
     CATransform3D transform = [self transform3d];
     __weak typeof(self) weakSelf = self;
+    UIViewController *topVcParentVc = [[self topView] parentViewController];
+    UIViewController *topVc =  topVcParentVc ? topVcParentVc : weakSelf;
     [UIView animateWithDuration:kLPPUAnimationDuration animations:^{
-        [weakSelf.enPopupViewController viewWillDisappear:NO];
-        popupView.layer.transform = transform;
+        [topVc.enPopupViewController viewWillDisappear:NO];
+        if (popupView) {
+            popupView.layer.transform = transform;
+        }
     } completion:^(BOOL finished) {
-        [popupView removeFromSuperview];
-        [blurView removeFromSuperview];
-        [overlayView removeFromSuperview];
-        [weakSelf.enPopupViewController viewDidDisappear:NO];
-        weakSelf.enPopupViewController = nil;
+        if (popupView) {
+            [popupView removeFromSuperview];
+        }
+        if (blurView) {
+            [blurView removeFromSuperview];
+        }
+        if (overlayView) {
+            [overlayView removeFromSuperview];
+        }
+        [topVc.enPopupViewController viewDidDisappear:NO];
+        topVc.enPopupViewController = nil;
         if (completion) {
             completion();
         }
@@ -141,7 +152,9 @@
 
 - (CATransform3D)transform3d
 {
-    switch (self.popUpEffectType) {
+    UIViewController *topVcParentVc = [[self topView] parentViewController];
+    UIViewController *topVc =  topVcParentVc ? topVcParentVc : self;
+    switch (topVc.popUpEffectType) {
         case UIViewControllerPopUpEffectTypeFlipUp:{
             CATransform3D transform = CATransform3DIdentity;
             transform               = CATransform3DTranslate(transform, 0.0, 200.0, 0.0);
@@ -172,10 +185,7 @@
 - (UIView *)topView
 {
     UIViewController *recentViewController = self;
-    while (recentViewController.parentViewController != nil) {
-        recentViewController = recentViewController.parentViewController;
-    }
-    return recentViewController.view;
+    return recentViewController.view.superview != nil ? (recentViewController.view.superview.parentViewController != nil ? recentViewController.view.superview.parentViewController.view : recentViewController.view) : recentViewController.view;
 }
 
 - (UIViewController *)enPopupViewController

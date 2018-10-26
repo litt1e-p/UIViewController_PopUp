@@ -7,6 +7,7 @@
 //
 
 #import "PopupController.h"
+#import "UIViewController+PopUp.h"
 
 @interface PopupController ()
 
@@ -18,6 +19,15 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+}
+
+- (IBAction)dismissBtnEvent:(UIButton *)sender {
+    [self dismissPopUpViewController];
+}
+
+- (void)dealloc
+{
+    NSLog(@"dealloc");
 }
 
 @end
