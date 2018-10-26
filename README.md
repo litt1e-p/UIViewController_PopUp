@@ -10,7 +10,7 @@ an extension of UIViewController for poping up a another ViewController with ani
 
 - use cocoapods
 ```swift
-pod 'UIViewController_PopUp', '~> 0.0.2'
+pod 'UIViewController_PopUp', '~> 0.0.3'
 ```
 - manual import
 ```swift
@@ -18,6 +18,10 @@ just download lib folder and add into your project
 ```
 
 # Release notes
+
+#### 0.0.3
+
+`the popup view can be dismissed everywhere now`
 
 #### 0.0.2
 
